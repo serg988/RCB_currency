@@ -13,6 +13,7 @@ const Http = (props) => {
 
   useEffect(() => {
     async function fetchData() {
+      // https://www.cbr-xml-daily.ru//archive//2013//03//26//daily_json.js
       const data = await axios.get('https://www.cbr-xml-daily.ru/daily_json.js')
       setUsd(data.data.Valute.USD.Value)
       setEur(data.data.Valute.EUR.Value)
@@ -63,7 +64,7 @@ const Http = (props) => {
 
 const styles = StyleSheet.create({
   screen: {
-    flex: 1,
+    marginBottom: 70,
     alignItems: 'center',
   },
   title: {
