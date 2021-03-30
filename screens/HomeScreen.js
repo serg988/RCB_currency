@@ -9,7 +9,7 @@ const HomeScreen = ({ navigation }) => (
     <Text style={styles.title}>Курсы Валют</Text>
     <Http />
     <Button
-      title='Выберете другую дату'
+      title='Выберите другую дату'
       onPress={() => navigation.navigate('PickDate')}
     />
   </View>

@@ -1,61 +1,66 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
+import { useSelector, useDispatch } from 'react-redux'
 import axios from 'axios'
+import { setInitRate } from '../store/actions/currency'
+import { set } from 'react-native-reanimated'
 
 const Http = (props) => {
-  const [usd, setUsd] = useState('')
-  const [eur, setEur] = useState('')
-  const [date, setDate] = useState('')
-
-  const [usdPrev, setUsdPrev] = useState('')
-  const [eurPrev, setEurPrev] = useState('')
-  const [datePrev, setDatePrev] = useState('')
+  const dispatch = useDispatch()
+  const rate = useSelector((state) => state.currency.rate)
+  const error = useSelector((state) => state.currency.error)
 
   useEffect(() => {
-    async function fetchData() {
-      // https://www.cbr-xml-daily.ru//archive//2013//03//26//daily_json.js
-      const data = await axios.get('https://www.cbr-xml-daily.ru/daily_json.js')
-      setUsd(data.data.Valute.USD.Value)
-      setEur(data.data.Valute.EUR.Value)
-      let date = new Date(data.data.Date).toLocaleDateString('ru', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      })
-      setDate(date)
-      setUsdPrev(data.data.Valute.USD.Previous)
-      setEurPrev(data.data.Valute.EUR.Previous)
-      let datePrev = new Date(data.data.PreviousDate).toLocaleDateString('ru', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      })
-      setDatePrev(datePrev)
-    }
-    fetchData()
+    dispatch(setInitRate())
   }, [])
+
+  console.log('ERRRRROR', error)
+
+  if (error) {
+    return (
+      <View style={styles.errorContainer}>
+        <Text style={styles.errorText}>{error}</Text>
+      </View>
+    )
+  }
   return (
     <View style={styles.screen}>
       <View style={styles.title}>
-        <Text>На текущую дату ({date})</Text>
+        <Text>
+          На дату: (
+          {new Date(rate.Date).toLocaleDateString('ru', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })}
+          )
+        </Text>
       </View>
       <View style={styles.currencyContainer}>
         <View>
-          <Text>USD: {usd}</Text>
+          <Text>USD: {rate.Valute.USD.Value}</Text>
         </View>
         <View>
-          <Text>EUR: {eur}</Text>
+          <Text>EUR: {rate.Valute.EUR.Value}</Text>
         </View>
       </View>
       <View style={styles.title}>
-        <Text>На пред. дату ({datePrev})</Text>
+        <Text>
+          На предшествующую дату (
+          {new Date(rate.PreviousDate).toLocaleDateString('ru', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })}
+          )
+        </Text>
       </View>
       <View style={styles.currencyContainer}>
         <View>
-          <Text>USD: {usdPrev}</Text>
+          <Text>USD: {rate.Valute.USD.Previous}</Text>
         </View>
         <View>
-          <Text>EUR: {eurPrev}</Text>
+          <Text>EUR: {rate.Valute.EUR.Previous}</Text>
         </View>
       </View>
     </View>
@@ -79,6 +84,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     width: '100%',
     backgroundColor: '#ccc',
+  },
+  errorContainer: {
+    padding: 70,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  errorText: {
+    color: 'red',
+    fontSize: 24,
   },
 })
 

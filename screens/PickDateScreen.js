@@ -1,23 +1,32 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import { View, Button, Text, StyleSheet, Platform } from 'react-native'
 import DateTimePicker from '@react-native-community/datetimepicker'
+import { enableScreens } from 'react-native-screens'
+import { useSelector, useDispatch } from 'react-redux'
+import { setRate } from '../store/actions/currency'
+
+enableScreens()
 
 const PickDateScreen = ({ navigation }) => {
-  const [date, setDate] = useState(new Date())
+  const currentDate = useSelector((state) => state.currency.date)
+  const [date, setDate] = useState(currentDate)
   const [show, setShow] = useState(true)
+  const dispatch = useDispatch()
 
   const onChange = (event, selectedDate) => {
     setShow(false)
+    dispatch(setRate(selectedDate))
     setDate(selectedDate)
   }
-  console.log(date)
+
+  // console.log(date)
   return (
     <View>
       {show && (
         <DateTimePicker
           testID='dateTimePicker'
-          value={date}
-          mode={date}
+          value={currentDate}
+          mode={currentDate}
           is24Hour={true}
           display='default'
           onChange={onChange}
@@ -49,7 +58,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   text: {
-    fontSize: 34,
+    fontSize: 24,
   },
 })
 
