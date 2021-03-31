@@ -5,6 +5,7 @@ import {
   SET_LOADING,
   UNSET_LOADING,
   SET_ERROR,
+  CLEAR_ERROR,
 } from '../actions/currency'
 import { dummy } from '../../dummy'
 
@@ -48,6 +49,11 @@ const currencyReducer = (state = initialState, action) => {
       return {
         ...state,
         error: action.payload,
+      }
+    case CLEAR_ERROR:
+      return {
+        ...state,
+        error: null,
       }
     default:
       return state

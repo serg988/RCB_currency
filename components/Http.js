@@ -1,40 +1,30 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
-import axios from 'axios'
 import { setInitRate } from '../store/actions/currency'
-import { set } from 'react-native-reanimated'
+import { getParsedDate } from '../components/getFormattedDate'
 
 const Http = (props) => {
   const dispatch = useDispatch()
   const rate = useSelector((state) => state.currency.rate)
   const error = useSelector((state) => state.currency.error)
 
+  const date = new Date(rate.Date)
+
   useEffect(() => {
     dispatch(setInitRate())
   }, [])
 
-  console.log('ERRRRROR', error)
+  let errorText = ''
+  if (error) errorText = error
 
-  if (error) {
-    return (
-      <View style={styles.errorContainer}>
-        <Text style={styles.errorText}>{error}</Text>
-      </View>
-    )
-  }
   return (
     <View style={styles.screen}>
+      <View style={styles.errorContainer}>
+        <Text style={styles.errorText}>{errorText}</Text>
+      </View>
       <View style={styles.title}>
-        <Text>
-          На дату: (
-          {new Date(rate.Date).toLocaleDateString('ru', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          })}
-          )
-        </Text>
+        <Text>На дату: ({getParsedDate(rate.Date)})</Text>
       </View>
       <View style={styles.currencyContainer}>
         <View>
@@ -45,15 +35,7 @@ const Http = (props) => {
         </View>
       </View>
       <View style={styles.title}>
-        <Text>
-          На предшествующую дату (
-          {new Date(rate.PreviousDate).toLocaleDateString('ru', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          })}
-          )
-        </Text>
+        <Text>На более раннюю дату: ({getParsedDate(rate.PreviousDate)})</Text>
       </View>
       <View style={styles.currencyContainer}>
         <View>
@@ -86,13 +68,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#ccc',
   },
   errorContainer: {
-    padding: 70,
+    paddingTop: 10,
+    paddingHorizontal: 20,
     alignItems: 'center',
     justifyContent: 'center',
   },
   errorText: {
-    color: 'red',
-    fontSize: 24,
+    color: 'purple',
+    fontSize: 14,
+    textAlign: 'center',
   },
 })
 

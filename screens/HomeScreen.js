@@ -2,14 +2,12 @@ import React from 'react'
 import { View, Text, Button, StyleSheet } from 'react-native'
 import Http from '../components/Http'
 
-import PickDateScreen from './PickDateScreen'
-
 const HomeScreen = ({ navigation }) => (
   <View style={styles.screen}>
     <Text style={styles.title}>Курсы Валют</Text>
     <Http />
     <Button
-      title='Выберите другую дату'
+      title='Выберите дату'
       onPress={() => navigation.navigate('PickDate')}
     />
   </View>
