@@ -8,30 +8,37 @@ const Http = (props) => {
   const dispatch = useDispatch()
   const rate = useSelector((state) => state.currency.rate)
   const error = useSelector((state) => state.currency.error)
-
-  const date = new Date(rate.Date)
+  const [showError, setShowError] = useState(false)
 
   useEffect(() => {
     dispatch(setInitRate())
   }, [])
 
-  let errorText = ''
-  if (error) errorText = error
+  useEffect(() => {
+    if (error) {
+      setShowError(true)
+      setTimeout(() => {
+        setShowError(false)
+      }, 3000)
+    }
+  }, [error])
 
   return (
     <View style={styles.screen}>
-      <View style={styles.errorContainer}>
-        <Text style={styles.errorText}>{errorText}</Text>
-      </View>
+      {showError && (
+        <View style={styles.errorContainer}>
+          <Text style={styles.errorText}>{error}</Text>
+        </View>
+      )}
       <View style={styles.title}>
         <Text>На дату: ({getParsedDate(rate.Date)})</Text>
       </View>
       <View style={styles.currencyContainer}>
         <View>
-          <Text>USD: {rate.Valute.USD.Value}</Text>
+          <Text style={styles.currencyText}>USD: {rate.Valute.USD.Value}</Text>
         </View>
         <View>
-          <Text>EUR: {rate.Valute.EUR.Value}</Text>
+          <Text style={styles.currencyText}>EUR: {rate.Valute.EUR.Value}</Text>
         </View>
       </View>
       <View style={styles.title}>
@@ -39,10 +46,14 @@ const Http = (props) => {
       </View>
       <View style={styles.currencyContainer}>
         <View>
-          <Text>USD: {rate.Valute.USD.Previous}</Text>
+          <Text style={styles.currencyText}>
+            USD: {rate.Valute.USD.Previous}
+          </Text>
         </View>
         <View>
-          <Text>EUR: {rate.Valute.EUR.Previous}</Text>
+          <Text style={styles.currencyText}>
+            EUR: {rate.Valute.EUR.Previous}
+          </Text>
         </View>
       </View>
     </View>
@@ -65,7 +76,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     width: '100%',
-    backgroundColor: '#ccc',
+    backgroundColor: '#d0efff',
+  },
+  currencyText: {
+    fontSize: 18,
   },
   errorContainer: {
     paddingTop: 10,
@@ -74,7 +88,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   errorText: {
-    color: 'purple',
+    color: '#790e0e',
     fontSize: 14,
     textAlign: 'center',
   },

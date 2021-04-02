@@ -27,6 +27,7 @@ const PickDateScreen = ({ navigation }) => {
         <DateTimePicker
           testID='dateTimePicker'
           value={currentDate}
+          color='#38220f'
           mode={date}
           is24Hour={true}
           display='default'

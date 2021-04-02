@@ -6,6 +6,7 @@ import { createStore, applyMiddleware, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import currencyReducer from './store/reducers/currency'
+import { OverflowMenuProvider } from 'react-navigation-header-buttons'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { setInitRate } from './store/actions/currency'

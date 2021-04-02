@@ -13,7 +13,7 @@ export const setDate = (date) => {
 
 const tryNextDate = (date) => {
   return (dispatch) => {
-    if (date.getDate() >= new Date().getDate()) {
+    if (+date >= +new Date() || +date < +new Date('1999-01-01')) {
       dispatch(setInitRate())
       return
     }
@@ -44,7 +44,7 @@ export const setRate = (selectedDate = new Date()) => {
       dispatch(tryNextDate(selectedDate))
       dispatch(
         setError(
-          'Возможно курс ЦБ на данную дату не был установлен, либо был установлен на более раннюю дату. Показаны ближайшие даты.'
+          'Возможно курс ЦБ на данную дату не был установлен. Показаны ближайшие даты.'
         )
       )
     }
