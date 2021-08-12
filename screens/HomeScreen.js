@@ -25,16 +25,8 @@ const ReusableHiddenItem = ({ onPress }) => (
 const HomeScreen = ({ navigation }) => {
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      // in your app, you can extract the arrow function into a separate component
-      // to avoid creating a new one every time you update the options
       headerRight: () => (
         <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
-          {/* <Item
-            title='search'
-            iconName='ios-search'
-            onPress={() => alert('search')}
-          />
-          <ReusableItem onPress={() => alert('Edit')} /> */}
           <OverflowMenu
             style={{ marginHorizontal: 10 }}
             OverflowIcon={({ color }) => (
@@ -45,7 +37,10 @@ const HomeScreen = ({ navigation }) => {
               />
             )}
           >
-            <HiddenItem title='О приложении' onPress={() => navigation.navigate('About')} />
+            <HiddenItem
+              title='О приложении'
+              onPress={() => navigation.navigate('About')}
+            />
             {/* <ReusableHiddenItem onPress={() => alert('hidden2')} /> */}
           </OverflowMenu>
         </HeaderButtons>
@@ -65,7 +60,7 @@ const HomeScreen = ({ navigation }) => {
   )
 }
 
-HomeScreen.navigationOptions = (navigationData) => {
+HomeScreen.navigationOptions = () => {
   return {
     headerTitle: 'mealTitle',
     headerRight: (

@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 import { setInitRate } from '../store/actions/currency'
 import { getParsedDate } from '../components/getFormattedDate'
+import { FontAwesome } from '@expo/vector-icons'
 
 const Http = (props) => {
   const dispatch = useDispatch()
@@ -34,26 +35,32 @@ const Http = (props) => {
         <Text>На дату: ({getParsedDate(rate.Date)})</Text>
       </View>
       <View style={styles.currencyContainer}>
-        <View>
-          <Text style={styles.currencyText}>USD: {rate.Valute.USD.Value}</Text>
+        {rate.Valute.USD.Value > rate.Valute.USD.Previous ? (
+          <FontAwesome name='long-arrow-up' size={36} color='red' />
+        ) : (
+          <FontAwesome name='long-arrow-down' size={36} color='green' />
+        )}
+        <View style={styles.currencyLine}>
+          <Text style={styles.currencyText}>$: {rate.Valute.USD.Value}</Text>
         </View>
-        <View>
-          <Text style={styles.currencyText}>EUR: {rate.Valute.EUR.Value}</Text>
+        {rate.Valute.EUR.Value > rate.Valute.EUR.Previous ? (
+          <FontAwesome name='long-arrow-up' size={36} color='red' />
+        ) : (
+          <FontAwesome name='long-arrow-down' size={36} color='green' />
+        )}
+        <View style={styles.currencyLine}>
+          <Text style={styles.currencyText}>€: {rate.Valute.EUR.Value}</Text>
         </View>
       </View>
       <View style={styles.title}>
         <Text>На более раннюю дату: ({getParsedDate(rate.PreviousDate)})</Text>
       </View>
       <View style={styles.currencyContainer}>
-        <View>
-          <Text style={styles.currencyText}>
-            USD: {rate.Valute.USD.Previous}
-          </Text>
+        <View style={styles.currencyLine}>
+          <Text style={styles.currencyText}>$: {rate.Valute.USD.Previous}</Text>
         </View>
-        <View>
-          <Text style={styles.currencyText}>
-            EUR: {rate.Valute.EUR.Previous}
-          </Text>
+        <View style={styles.currencyLine}>
+          <Text style={styles.currencyText}>€: {rate.Valute.EUR.Previous}</Text>
         </View>
       </View>
     </View>
@@ -72,14 +79,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   currencyContainer: {
-    padding: 20,
+    padding: 10,
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    width: '100%',
-    backgroundColor: '#d0efff',
+    justifyContent: 'space-between',
+    width: '80%',
+    elevation: 5,
+    backgroundColor: '#fff',
+  },
+  currencyLine: {
+    flex: 1,
   },
   currencyText: {
-    fontSize: 18,
+    fontSize: 20,
   },
   errorContainer: {
     paddingTop: 10,
