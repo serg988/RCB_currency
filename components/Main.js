@@ -32,12 +32,6 @@ const Http = (props) => {
 
   return (
     <View style={styles.screen}>
-      {showError && (
-        <View style={styles.errorContainer}>
-          <Text style={styles.errorText}>{error}</Text>
-        </View>
-      )}
-
       <View style={styles.title}>
         <Text>Текущий курс (неофициальный)</Text>
       </View>
@@ -57,20 +51,44 @@ const Http = (props) => {
       <View style={styles.row}>
         <View style={styles.currencyBox}>
           {rate.Valute.USD.Value > rate.Valute.USD.Previous ? (
-            <FontAwesome name='long-arrow-up' size={24} color='red' />
+            <FontAwesome
+              name='long-arrow-up'
+              size={24}
+              color='red'
+              style={{ position: 'absolute', left: 5 }}
+            />
           ) : (
-            <FontAwesome name='long-arrow-down' size={24} color='green' />
+            <FontAwesome
+              name='long-arrow-down'
+              size={24}
+              color='green'
+              style={{ position: 'absolute', left: 5 }}
+            />
           )}
-          <Text style={styles.currencyText}>$: {rate.Valute.USD.Value}</Text>
+          <Text style={styles.currencyText}>
+            $: {rate.Valute.USD.Value.toFixed(4)}
+          </Text>
         </View>
 
         <View style={styles.currencyBox}>
           {rate.Valute.EUR.Value > rate.Valute.EUR.Previous ? (
-            <FontAwesome name='long-arrow-up' size={24} color='red' />
+            <FontAwesome
+              name='long-arrow-up'
+              size={24}
+              color='red'
+              style={{ position: 'absolute', left: 5 }}
+            />
           ) : (
-            <FontAwesome name='long-arrow-down' size={24} color='green' />
+            <FontAwesome
+              name='long-arrow-down'
+              size={24}
+              color='green'
+              style={{ position: 'absolute', left: 5 }}
+            />
           )}
-          <Text style={styles.currencyText}>€: {rate.Valute.EUR.Value}</Text>
+          <Text style={styles.currencyText}>
+            €: {rate.Valute.EUR.Value.toFixed(4)}
+          </Text>
         </View>
       </View>
       <View style={styles.title}>
@@ -78,12 +96,21 @@ const Http = (props) => {
       </View>
       <View style={styles.row}>
         <View style={styles.currencyBox}>
-          <Text style={styles.currencyText}>$: {rate.Valute.USD.Previous}</Text>
+          <Text style={styles.currencyText}>
+            $: {rate.Valute.USD.Previous.toFixed(4)}
+          </Text>
         </View>
         <View style={styles.currencyBox}>
-          <Text style={styles.currencyText}>€: {rate.Valute.EUR.Previous}</Text>
+          <Text style={styles.currencyText}>
+            €: {rate.Valute.EUR.Previous.toFixed(4)}
+          </Text>
         </View>
       </View>
+      {showError && (
+        <View style={styles.errorContainer}>
+          <Text style={styles.errorText}>{error}</Text>
+        </View>
+      )}
     </View>
   )
 }
@@ -107,7 +134,9 @@ const styles = StyleSheet.create({
   },
   currencyBox: {
     padding: 10,
+    width: '40%',
     flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
     elevation: 7,
     backgroundColor: '#fff',
