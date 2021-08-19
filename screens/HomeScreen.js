@@ -101,7 +101,7 @@ HomeScreen.navigationOptions = () => {
 
 const styles = StyleSheet.create({
   screen: {
-    flex: 1,
+    // flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
   },

@@ -5,7 +5,7 @@ import { setInitRate, setCurrentRate } from '../store/actions/currency'
 import { getParsedDate } from './getFormattedDate'
 import { FontAwesome } from '@expo/vector-icons'
 
-const Http = (props) => {
+const Main = (props) => {
   const dispatch = useDispatch()
   const rate = useSelector((state) => state.currency.rate)
   const currentUsd = useSelector((state) => state.currency.currentUsd)
@@ -118,7 +118,9 @@ const Http = (props) => {
 const styles = StyleSheet.create({
   screen: {
     marginBottom: 70,
+    paddingHorizontal: 15,
     alignItems: 'center',
+    width: '100%',
   },
   title: {
     // flex: 1,
@@ -128,13 +130,13 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
     alignItems: 'stretch',
     width: '100%',
   },
   currencyBox: {
     padding: 10,
-    width: '40%',
+    width: '47%',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -143,18 +145,6 @@ const styles = StyleSheet.create({
     borderRadius: 7,
   },
 
-  currencyContainer: {
-    padding: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '80%',
-    elevation: 5,
-    backgroundColor: '#fff',
-    borderRadius: 7,
-  },
-  currencyLine: {
-    flex: 1,
-  },
   currencyText: {
     fontSize: 20,
   },
@@ -171,4 +161,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default Http
+export default Main
