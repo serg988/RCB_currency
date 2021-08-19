@@ -35,11 +35,7 @@ export const setCurrentRate = () => {
       console.log(data.data)
       dispatch({ type: SET_CURRENT_USD, payload: data.data })
     } catch (error) {
-      dispatch(
-        setError(
-          'Текущий курс недоступен. Попытайтесь позже.'
-        )
-      )
+      dispatch(setError('Текущий курс недоступен. Попытайтесь позже.'))
     }
     try {
       const data = await axios.get(
@@ -48,11 +44,7 @@ export const setCurrentRate = () => {
       console.log(data.data)
       dispatch({ type: SET_CURRENT_EUR, payload: data.data })
     } catch (error) {
-      dispatch(
-        setError(
-          'Текущий курс недоступен. Попытайтесь позже.'
-        )
-      )
+      dispatch(setError('Текущий курс недоступен. Попытайтесь позже.'))
     }
   }
 }

@@ -1,7 +1,16 @@
-import React from 'react'
-import { View, Text, Button, StyleSheet } from 'react-native'
+import React, { useState } from 'react'
+import {
+  View,
+  ScrollView,
+  RefreshControl,
+  Text,
+  Button,
+  StyleSheet,
+} from 'react-native'
+import { useDispatch } from 'react-redux'
 import { Ionicons } from '@expo/vector-icons'
-import Http from '../components/Http'
+import Main from '../components/Main'
+import { setCurrentRate } from '../store/actions/currency'
 import {
   HeaderButtons,
   HeaderButton,
@@ -9,11 +18,11 @@ import {
   HiddenItem,
   OverflowMenu,
 } from 'react-navigation-header-buttons'
+import { log } from 'react-native-reanimated'
+// import { ScrollView } from 'react-native-gesture-handler'
 
 const IoniconsHeaderButton = (props) => (
-  // the `props` here come from <Item ... />
-  // you may access them and pass something else to `HeaderButton` if you like
-  <HeaderButton IconComponent={Ionicons} iconSize={23} {...props} />
+   <HeaderButton IconComponent={Ionicons} iconSize={23} {...props} />
 )
 
 const ReusableItem = ({ onPress }) => <Item title='Edit' onPress={onPress} />
@@ -23,6 +32,8 @@ const ReusableHiddenItem = ({ onPress }) => (
 )
 
 const HomeScreen = ({ navigation }) => {
+  const [refreshing, setRefreshing] = useState(false)
+  const dispatch = useDispatch()
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
@@ -41,22 +52,34 @@ const HomeScreen = ({ navigation }) => {
               title='О приложении'
               onPress={() => navigation.navigate('About')}
             />
-            {/* <ReusableHiddenItem onPress={() => alert('hidden2')} /> */}
           </OverflowMenu>
         </HeaderButtons>
       ),
     })
   }, [navigation])
   return (
-    <View style={styles.screen}>
-      <Text style={styles.title}>Курсы Валют</Text>
-      <Http />
-      <Button
-        title='Выберите дату'
-        color='#5094cb'
-        onPress={() => navigation.navigate('PickDate')}
-      />
-    </View>
+    <ScrollView
+      refreshControl={
+        <RefreshControl
+          refreshing={refreshing}
+          onRefresh={() => {
+            dispatch(setCurrentRate())
+          }}
+        />
+      }
+    >
+      <View style={styles.screen}>
+        <Text style={styles.title}>Курсы Валют</Text>
+
+        <Main />
+
+        <Button
+          title='Выберите дату'
+          color='#5094cb'
+          onPress={() => navigation.navigate('PickDate')}
+        />
+      </View>
+    </ScrollView>
   )
 }
 

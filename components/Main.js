@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 import { setInitRate, setCurrentRate } from '../store/actions/currency'
-import { getParsedDate } from '../components/getFormattedDate'
+import { getParsedDate } from './getFormattedDate'
 import { FontAwesome } from '@expo/vector-icons'
 
 const Http = (props) => {
@@ -16,6 +16,8 @@ const Http = (props) => {
   useEffect(() => {
     dispatch(setInitRate())
   }, [])
+
+  setTimeout(()=>{}, 3000)
 
   useEffect(() => {
     dispatch(setCurrentRate())
@@ -39,7 +41,7 @@ const Http = (props) => {
       )}
 
       <View style={styles.title}>
-        <Text>Текущий курс</Text>
+        <Text>Текущий курс (неофициальный)</Text>
       </View>
       <View style={styles.currencyContainer}>
         {/* {rate.Valute.USD.Value > rate.Valute.USD.Previous ? (
@@ -61,7 +63,7 @@ const Http = (props) => {
       </View>
 
       <View style={styles.title}>
-        <Text>На дату: ({getParsedDate(rate.Date)})</Text>
+        <Text>На дату (официальный): ({getParsedDate(rate.Date)})</Text>
       </View>
       <View style={styles.currencyContainer}>
         {rate.Valute.USD.Value > rate.Valute.USD.Previous ? (
