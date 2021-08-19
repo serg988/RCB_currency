@@ -1,18 +1,24 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
-import { setInitRate } from '../store/actions/currency'
+import { setInitRate, setCurrentRate } from '../store/actions/currency'
 import { getParsedDate } from '../components/getFormattedDate'
 import { FontAwesome } from '@expo/vector-icons'
 
 const Http = (props) => {
   const dispatch = useDispatch()
   const rate = useSelector((state) => state.currency.rate)
+  const currentUsd = useSelector((state) => state.currency.currentUsd)
+  const currentEur = useSelector((state) => state.currency.currentEur)
   const error = useSelector((state) => state.currency.error)
   const [showError, setShowError] = useState(false)
 
   useEffect(() => {
     dispatch(setInitRate())
+  }, [])
+
+  useEffect(() => {
+    dispatch(setCurrentRate())
   }, [])
 
   useEffect(() => {
@@ -31,6 +37,29 @@ const Http = (props) => {
           <Text style={styles.errorText}>{error}</Text>
         </View>
       )}
+
+      <View style={styles.title}>
+        <Text>Текущий курс</Text>
+      </View>
+      <View style={styles.currencyContainer}>
+        {/* {rate.Valute.USD.Value > rate.Valute.USD.Previous ? (
+          <FontAwesome name='long-arrow-up' size={36} color='red' />
+        ) : (
+          <FontAwesome name='long-arrow-down' size={36} color='green' />
+        )} */}
+        <View style={styles.currencyLine}>
+          <Text style={styles.currencyText}>$: {currentUsd}</Text>
+        </View>
+        {/* {rate.Valute.EUR.Value > rate.Valute.EUR.Previous ? (
+          <FontAwesome name='long-arrow-up' size={36} color='red' />
+        ) : (
+          <FontAwesome name='long-arrow-down' size={36} color='green' />
+        )} */}
+        <View style={styles.currencyLine}>
+          <Text style={styles.currencyText}>€: {currentEur}</Text>
+        </View>
+      </View>
+
       <View style={styles.title}>
         <Text>На дату: ({getParsedDate(rate.Date)})</Text>
       </View>

@@ -1,6 +1,8 @@
 export const SET_DATE = 'SET_DATE'
 export const SET_RATE = 'SET_RATE'
 export const SET_INIT_RATE = 'SET_INIT_RATE'
+export const SET_CURRENT_USD = 'SET_CURRENT_USD'
+export const SET_CURRENT_EUR = 'SET_CURRENT_EUR'
 export const SET_LOADING = 'SET_LOADING'
 export const UNSET_LOADING = 'UNSET_LOADING'
 export const SET_ERROR = 'SET_ERROR'
@@ -22,11 +24,44 @@ const tryNextDate = (date) => {
   }
 }
 
+// https://api.coingate.com/v2/rates/merchant/USD/RUB
+
+export const setCurrentRate = () => {
+  return async (dispatch) => {
+    try {
+      const data = await axios.get(
+        'https://api.coingate.com/v2/rates/merchant/USD/RUB'
+      )
+      console.log(data.data)
+      dispatch({ type: SET_CURRENT_USD, payload: data.data })
+    } catch (error) {
+      dispatch(
+        setError(
+          'Текущий курс недоступен. Попытайтесь позже.'
+        )
+      )
+    }
+    try {
+      const data = await axios.get(
+        'https://api.coingate.com/v2/rates/merchant/EUR/RUB'
+      )
+      console.log(data.data)
+      dispatch({ type: SET_CURRENT_EUR, payload: data.data })
+    } catch (error) {
+      dispatch(
+        setError(
+          'Текущий курс недоступен. Попытайтесь позже.'
+        )
+      )
+    }
+  }
+}
+
 export const setRate = (selectedDate = new Date()) => {
   return async (dispatch) => {
     dispatch(setError(''))
 
-    console.log('SELECTED DATE', selectedDate)
+    // console.log('SELECTED DATE', selectedDate)
     const yyyy = selectedDate.getUTCFullYear()
     let mm =
       selectedDate.getUTCMonth() + 1 > 9

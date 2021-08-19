@@ -6,6 +6,8 @@ import {
   UNSET_LOADING,
   SET_ERROR,
   CLEAR_ERROR,
+  SET_CURRENT_USD,
+  SET_CURRENT_EUR,
 } from '../actions/currency'
 import { dummy } from '../../dummy'
 
@@ -13,6 +15,8 @@ const initialState = {
   date: new Date(),
   loading: false,
   rate: dummy,
+  currentUsd: 0,
+  currentEur: 0,
   error: '',
 }
 
@@ -33,6 +37,18 @@ const currencyReducer = (state = initialState, action) => {
       return {
         ...state,
         rate: action.payload,
+        loading: false,
+      }
+    case SET_CURRENT_USD:
+      return {
+        ...state,
+        currentUsd: action.payload,
+        loading: false,
+      }
+    case SET_CURRENT_EUR:
+      return {
+        ...state,
+        currentEur: action.payload,
         loading: false,
       }
     case SET_LOADING:
