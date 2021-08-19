@@ -69,7 +69,7 @@ const HomeScreen = ({ navigation }) => {
       }
     >
       <View style={styles.screen}>
-        <Text style={styles.title}>Курсы Валют</Text>
+        {/* <Text style={styles.title}>Курсы Валют</Text> */}
 
         <Main />
 

@@ -17,8 +17,6 @@ const Http = (props) => {
     dispatch(setInitRate())
   }, [])
 
-  setTimeout(()=>{}, 3000)
-
   useEffect(() => {
     dispatch(setCurrentRate())
   }, [])
@@ -43,54 +41,46 @@ const Http = (props) => {
       <View style={styles.title}>
         <Text>Текущий курс (неофициальный)</Text>
       </View>
-      <View style={styles.currencyContainer}>
-        {/* {rate.Valute.USD.Value > rate.Valute.USD.Previous ? (
-          <FontAwesome name='long-arrow-up' size={36} color='red' />
-        ) : (
-          <FontAwesome name='long-arrow-down' size={36} color='green' />
-        )} */}
-        <View style={styles.currencyLine}>
+      <View style={styles.row}>
+        <View style={styles.currencyBox}>
           <Text style={styles.currencyText}>$: {currentUsd}</Text>
         </View>
-        {/* {rate.Valute.EUR.Value > rate.Valute.EUR.Previous ? (
-          <FontAwesome name='long-arrow-up' size={36} color='red' />
-        ) : (
-          <FontAwesome name='long-arrow-down' size={36} color='green' />
-        )} */}
-        <View style={styles.currencyLine}>
+
+        <View style={styles.currencyBox}>
           <Text style={styles.currencyText}>€: {currentEur}</Text>
         </View>
       </View>
 
       <View style={styles.title}>
-        <Text>На дату (официальный): ({getParsedDate(rate.Date)})</Text>
+        <Text>Официальный. Дата: ({getParsedDate(rate.Date)})</Text>
       </View>
-      <View style={styles.currencyContainer}>
-        {rate.Valute.USD.Value > rate.Valute.USD.Previous ? (
-          <FontAwesome name='long-arrow-up' size={36} color='red' />
-        ) : (
-          <FontAwesome name='long-arrow-down' size={36} color='green' />
-        )}
-        <View style={styles.currencyLine}>
+      <View style={styles.row}>
+        <View style={styles.currencyBox}>
+          {rate.Valute.USD.Value > rate.Valute.USD.Previous ? (
+            <FontAwesome name='long-arrow-up' size={24} color='red' />
+          ) : (
+            <FontAwesome name='long-arrow-down' size={24} color='green' />
+          )}
           <Text style={styles.currencyText}>$: {rate.Valute.USD.Value}</Text>
         </View>
-        {rate.Valute.EUR.Value > rate.Valute.EUR.Previous ? (
-          <FontAwesome name='long-arrow-up' size={36} color='red' />
-        ) : (
-          <FontAwesome name='long-arrow-down' size={36} color='green' />
-        )}
-        <View style={styles.currencyLine}>
+
+        <View style={styles.currencyBox}>
+          {rate.Valute.EUR.Value > rate.Valute.EUR.Previous ? (
+            <FontAwesome name='long-arrow-up' size={24} color='red' />
+          ) : (
+            <FontAwesome name='long-arrow-down' size={24} color='green' />
+          )}
           <Text style={styles.currencyText}>€: {rate.Valute.EUR.Value}</Text>
         </View>
       </View>
       <View style={styles.title}>
         <Text>На более раннюю дату: ({getParsedDate(rate.PreviousDate)})</Text>
       </View>
-      <View style={styles.currencyContainer}>
-        <View style={styles.currencyLine}>
+      <View style={styles.row}>
+        <View style={styles.currencyBox}>
           <Text style={styles.currencyText}>$: {rate.Valute.USD.Previous}</Text>
         </View>
-        <View style={styles.currencyLine}>
+        <View style={styles.currencyBox}>
           <Text style={styles.currencyText}>€: {rate.Valute.EUR.Previous}</Text>
         </View>
       </View>
@@ -109,6 +99,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'stretch',
+    width: '100%',
+  },
+  currencyBox: {
+    padding: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    elevation: 7,
+    backgroundColor: '#fff',
+    borderRadius: 7,
+  },
+
   currencyContainer: {
     padding: 10,
     flexDirection: 'row',
@@ -116,6 +121,7 @@ const styles = StyleSheet.create({
     width: '80%',
     elevation: 5,
     backgroundColor: '#fff',
+    borderRadius: 7,
   },
   currencyLine: {
     flex: 1,
