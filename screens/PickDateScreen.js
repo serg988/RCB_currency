@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
-import { View } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { View, Text, Button, Platform, StyleSheet } from 'react-native'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { enableScreens } from 'react-native-screens'
 import { useSelector, useDispatch } from 'react-redux'
 import { setRate } from '../store/actions/currency'
-
 
 enableScreens()
 
@@ -15,27 +14,57 @@ const PickDateScreen = ({ navigation }) => {
   const dispatch = useDispatch()
 
   const onChange = (e, selectedDate) => {
-    setShow(false)
-    dispatch(setRate(selectedDate))
+    console.log('CURRENT', selectedDate)
+
+    setShow(Platform.OS === 'ios')
+
     setDate(selectedDate)
+    dispatch(setRate(selectedDate))
     navigation.navigate('Home')
   }
 
   return (
-    <View>
+    <View style={styles.container}>
       {show && (
         <DateTimePicker
-          testID='dateTimePicker'
-          value={currentDate}
+          value={date}
+          mode={'date'}
           color='#38220f'
-          mode={date}
+          display={Platform.OS === 'ios' ? 'inline' : 'default'}
           is24Hour={true}
-          display='default'
           onChange={onChange}
+          style={styles.datePicker}
         />
       )}
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
+    padding: 50,
+  },
+  pickedDateContainer: {
+    padding: 20,
+    backgroundColor: '#eee',
+    borderRadius: 10,
+  },
+  pickedDate: {
+    fontSize: 18,
+    color: 'black',
+  },
+  datePicker: {
+    width: 320,
+    height: 360,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+  },
+})
 
 export default PickDateScreen
