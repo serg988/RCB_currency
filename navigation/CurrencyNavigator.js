@@ -28,7 +28,6 @@ function Tabs() {
     <Tab.Navigator>
       <Tab.Screen name='Home' component={HomeScreen} />
       <Tab.Screen name='Multi' component={MultiCurrencyScreen} />
-      
     </Tab.Navigator>
   )
 }

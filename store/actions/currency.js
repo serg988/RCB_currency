@@ -8,6 +8,7 @@ export const UNSET_LOADING = 'UNSET_LOADING'
 export const SET_ERROR = 'SET_ERROR'
 export const CLEAR_ERROR = 'CLEAR_ERROR'
 import axios from 'axios'
+import api from '../../api/api'
 
 export const setDate = (date) => {
   return { type: SET_DATE, date: date }
@@ -63,9 +64,9 @@ export const setRate = (selectedDate = new Date()) => {
       selectedDate.getUTCDate() > 9
         ? selectedDate.getUTCDate()
         : '0' + selectedDate.getUTCDate()
-    let url = `https://www.cbr-xml-daily.ru/archive/${yyyy}/${mm}/${dd}/daily_json.js`
+    let url = `/${yyyy}/${mm}/${dd}/daily_json.js`
     try {
-      const data = await axios.get(url)
+      const data = await api.get(url)
       dispatch({ type: SET_RATE, payload: data.data })
     } catch (error) {
       dispatch(tryNextDate(selectedDate))
