@@ -20,7 +20,7 @@ const PickDateScreen = ({ navigation }) => {
 
     setDate(selectedDate)
     dispatch(setRate(selectedDate))
-    navigation.navigate('Tabs')
+    navigation.goBack()
   }
 
   return (
