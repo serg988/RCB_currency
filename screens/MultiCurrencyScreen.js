@@ -6,12 +6,14 @@ import MultiCurrencyItem from '../components/MultiCurrencyItem'
 const MultiCurrencyScreen = ({ navigation }) => {
   const dispatch = useDispatch()
   const rate = useSelector((state) => state.currency.rate.Valute)
+  console.log(rate)
   const unfilteredRates = []
   for (const key in rate) {
     unfilteredRates.push({
       currencyCode: key,
       currencyName: rate[key].Name,
       currencyRate: rate[key].Value,
+      diff: (rate[key].Value - rate[key].Previous).toFixed(4)
     })
     console.log(key, rate[key].Name)
   }
@@ -31,6 +33,7 @@ const MultiCurrencyScreen = ({ navigation }) => {
             code={r.currencyCode}
             name={r.currencyName}
             rate={r.currencyRate}
+            diff={r.diff}
           />
         )
       })}

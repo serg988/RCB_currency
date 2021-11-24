@@ -1,13 +1,15 @@
 import React from 'react'
-import { ScrollView, View, Text, Button, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import { codes } from '../currencyCodes'
 import Icon from 'react-native-ico-flags'
 
-const MultiCurrencyItem = ({ code, name, rate }) => {
+const MultiCurrencyItem = ({ code, name, rate, diff }) => {
   const fl = codes[code]
   const flag = fl.text
   const ch = codes[code]
   const char = ch.char
+  const cu = codes[code]
+  const curr = cu.curr
   console.log('FLAG', flag)
   return (
     <View style={styles.container}>
@@ -16,11 +18,13 @@ const MultiCurrencyItem = ({ code, name, rate }) => {
         <Icon name={flag} height='40' width='40' />
       </View>
       <View style={styles.nameBox}>
-        <Text>{name}</Text>
+        <Text style={styles.nameText}>{curr}</Text>
       </View>
       <View>
         <Text>{`${char} = `}</Text>
         <Text>{`${rate} руб.`}</Text>
+        {diff <= 0 && <Text style={{ color: 'red' }}>{`${diff}`}</Text>}
+        {diff > 0 && <Text style={{ color: 'green' }}>{`+${diff}`}</Text>}
       </View>
     </View>
   )
@@ -39,6 +43,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '50%',
     paddingLeft: 15,
+  },
+  nameText: {
+    fontWeight: 'bold',
+    fontSize: 15,
   },
 })
 

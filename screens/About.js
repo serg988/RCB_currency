@@ -16,7 +16,7 @@ const About = () => (
         на ближайшие прошедшую и будущую даты.
       </Text>
     </View>
-    <Text style={styles.textBottom}>Версия: 1.1.1</Text>
+    <Text style={styles.textBottom}>Версия: 2.0.0</Text>
     <Text style={styles.textBottom}>Written by: Sergey Popov</Text>
     <Text style={styles.textBottom}>Email me: serg98888@gmail.com</Text>
   </View>
