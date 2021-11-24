@@ -19,7 +19,8 @@ const MultiCurrencyItem = ({ code, name, rate }) => {
         <Text>{name}</Text>
       </View>
       <View>
-        <Text>{`${char} = ${rate} руб.`}</Text>
+        <Text>{`${char} = `}</Text>
+        <Text>{`${rate} руб.`}</Text>
       </View>
     </View>
   )
