@@ -4,7 +4,10 @@ import { codes } from '../currencyCodes'
 import Icon from 'react-native-ico-flags'
 
 const MultiCurrencyItem = ({ code, name, rate }) => {
-  const flag = codes[code]
+  const fl = codes[code]
+  const flag = fl.text
+  const ch = codes[code]
+  const char = ch.char
   console.log('FLAG', flag)
   return (
     <View style={styles.container}>
@@ -16,7 +19,7 @@ const MultiCurrencyItem = ({ code, name, rate }) => {
         <Text>{name}</Text>
       </View>
       <View>
-        <Text>{rate}</Text>
+        <Text>{`${char} = ${rate} руб.`}</Text>
       </View>
     </View>
   )
@@ -29,9 +32,12 @@ const styles = StyleSheet.create({
     borderBottomColor: '#aaa',
     borderBottomWidth: 1,
     marginBottom: 10,
+    marginHorizontal: 15,
   },
   nameBox: {
     justifyContent: 'center',
+    width: '50%',
+    paddingLeft: 15,
   },
 })
 
