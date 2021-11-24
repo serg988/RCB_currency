@@ -3,6 +3,8 @@ import { View, Text, Button } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { FontAwesome5 } from '@expo/vector-icons'
+import { Foundation } from '@expo/vector-icons'
 
 import { OverflowMenuProvider } from 'react-navigation-header-buttons'
 import {
@@ -26,11 +28,31 @@ const Tab = createBottomTabNavigator()
 function Tabs() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name='Home' component={HomeScreen} />
-      <Tab.Screen name='Multi' component={MultiCurrencyScreen} />
+      <Tab.Screen
+        name='Home'
+        component={HomeScreen}
+        options={{
+          // tabBarLabel: 'Home',
+          tabBarIcon: () => (
+            <FontAwesome5 name='home' size={24} color='black' />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name='Все валюты'
+        component={MultiCurrencyScreen}
+        options={{
+          // tabBarLabel: 'Home',
+          tabBarIcon: () => (
+            <Foundation name='dollar-bill' size={34} color='black' />
+          ),
+        }}
+      />
     </Tab.Navigator>
   )
 }
+
+//
 
 function CurrencyNavigator(navigation) {
   return (

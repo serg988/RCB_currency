@@ -14,17 +14,16 @@ const MultiCurrencyItem = ({ code, name, rate, diff }) => {
   return (
     <View style={styles.container}>
       <View>
-        <Text>{code}</Text>
-        <Icon name={flag} height='40' width='40' />
+        <Icon name={flag} height='60' width='60' />
       </View>
       <View style={styles.nameBox}>
-        <Text style={styles.nameText}>{curr}</Text>
+        <Text style={styles.nameText}>{`${code} - ${curr}`}</Text>
       </View>
       <View>
         <Text>{`${char} = `}</Text>
         <Text>{`${rate} руб.`}</Text>
-        {diff <= 0 && <Text style={{ color: 'red' }}>{`${diff}`}</Text>}
-        {diff > 0 && <Text style={{ color: 'green' }}>{`+${diff}`}</Text>}
+        {diff <= 0 && <Text style={{ color: 'red' }}>{`(${diff})`}</Text>}
+        {diff > 0 && <Text style={{ color: 'green' }}>{`(+${diff})`}</Text>}
       </View>
     </View>
   )
@@ -32,10 +31,13 @@ const MultiCurrencyItem = ({ code, name, rate, diff }) => {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#eee',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    borderBottomColor: '#aaa',
-    borderBottomWidth: 1,
+    // borderBottomColor: '#aaa',
+    // borderBottomWidth: 1,
+    borderRadius: 7,
+    elevation: 2,
     marginBottom: 10,
     marginHorizontal: 15,
   },
