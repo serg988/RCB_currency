@@ -27,14 +27,34 @@ const Tab = createBottomTabNavigator()
 
 function Tabs() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      // screenOptions={{
+      //   headerStyle: {
+      //     backgroundColor: '#9db802',
+      //   },
+      //   headerTintColor: '#fff',
+      //   headerTitleStyle: {
+      //     fontWeight: 'bold',
+      //   },
+      // }}
+      tabBarOptions={{
+        activeTintColor: '#fff',
+        inactiveTintColor: 'lightgray',
+        activeBackgroundColor: '#025b0e',
+        inactiveBackgroundColor: '#9db802',
+        style: {
+          backgroundColor: '#025b0e',
+          paddingBottom: 0,
+        },
+      }}
+    >
       <Tab.Screen
         name='Home'
         component={HomeScreen}
         options={{
           // tabBarLabel: 'Home',
           tabBarIcon: () => (
-            <FontAwesome5 name='home' size={24} color='black' />
+            <FontAwesome5 name='home' size={24} color='#fff' />
           ),
         }}
       />
@@ -44,7 +64,7 @@ function Tabs() {
         options={{
           // tabBarLabel: 'Home',
           tabBarIcon: () => (
-            <Foundation name='dollar-bill' size={34} color='black' />
+            <Foundation name='dollar-bill' size={34} color='#fff' />
           ),
         }}
       />
@@ -58,7 +78,17 @@ function CurrencyNavigator(navigation) {
   return (
     <NavigationContainer>
       <OverflowMenuProvider>
-        <Stack.Navigator>
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: '#9db802',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        >
           <Stack.Screen name='Tabs' component={Tabs} />
           <Stack.Screen
             name='Home'
@@ -67,7 +97,7 @@ function CurrencyNavigator(navigation) {
               title: 'Текущие курсы валют',
 
               headerStyle: {
-                backgroundColor: '#5094cb',
+                backgroundColor: '#9db802',
               },
               headerTintColor: '#fff',
               headerTitleStyle: {

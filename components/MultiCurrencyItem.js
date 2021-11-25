@@ -13,7 +13,7 @@ const MultiCurrencyItem = ({ code, name, rate, diff }) => {
   console.log('FLAG', flag)
   return (
     <View style={styles.container}>
-      <View>
+      <View style={styles.iconContainer}>
         <Icon name={flag} height='60' width='60' />
       </View>
       <View style={styles.nameBox}>
@@ -31,15 +31,18 @@ const MultiCurrencyItem = ({ code, name, rate, diff }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#eee',
+    backgroundColor: '#f0eeef',
     flexDirection: 'row',
     justifyContent: 'space-between',
     // borderBottomColor: '#aaa',
     // borderBottomWidth: 1,
     borderRadius: 7,
-    elevation: 2,
-    marginBottom: 10,
+    elevation: 4,
+    marginBottom: 5,
     marginHorizontal: 15,
+  },
+  iconContainer: {
+    // backgroundColor: '#fff',
   },
   nameBox: {
     justifyContent: 'center',

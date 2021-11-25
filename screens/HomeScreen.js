@@ -22,7 +22,7 @@ import { log } from 'react-native-reanimated'
 // import { ScrollView } from 'react-native-gesture-handler'
 
 const IoniconsHeaderButton = (props) => (
-   <HeaderButton IconComponent={Ionicons} iconSize={23} {...props} />
+  <HeaderButton IconComponent={Ionicons} iconSize={23} {...props} />
 )
 
 const ReusableItem = ({ onPress }) => <Item title='Edit' onPress={onPress} />
@@ -70,14 +70,15 @@ const HomeScreen = ({ navigation }) => {
     >
       <View style={styles.screen}>
         {/* <Text style={styles.title}>Курсы Валют</Text> */}
-
-        <Main />
-
+        <View style={{width:'100%'}}>
         <Button
+          style={{ outerWidth: '100%' }}
           title='Выберите дату'
-          color='#5094cb'
+          color='#9db802'
           onPress={() => navigation.navigate('PickDate')}
         />
+        </View>
+        <Main />
       </View>
     </ScrollView>
   )

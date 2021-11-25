@@ -13,17 +13,17 @@ const MultiCurrencyScreen = ({ navigation }) => {
       currencyCode: key,
       currencyName: rate[key].Name,
       currencyRate: rate[key].Value,
-      diff: (rate[key].Value - rate[key].Previous).toFixed(4)
+      diff: (rate[key].Value - rate[key].Previous).toFixed(4),
     })
     console.log(key, rate[key].Name)
   }
   const rates = unfilteredRates.filter((rate) => rate.currencyCode !== 'XDR')
 
   return (
-    <ScrollView>
+    <ScrollView style={styles.container}>
       <Button
         title='Выберите дату'
-        color='#5094cb'
+        color='#9db802'
         onPress={() => navigation.navigate('PickDate')}
       />
       {rates.map((r) => {
@@ -41,6 +41,10 @@ const MultiCurrencyScreen = ({ navigation }) => {
   )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#cfcdcb',
+  },
+})
 
 export default MultiCurrencyScreen
