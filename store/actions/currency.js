@@ -11,7 +11,7 @@ import axios from 'axios'
 import api from '../../api/api'
 
 export const setDate = (date) => {
-  return { type: SET_DATE, date: date }
+  return { type: SET_DATE, payload: date }
 }
 
 const tryNextDate = (date) => {
@@ -33,7 +33,7 @@ export const setCurrentRate = () => {
       const data = await axios.get(
         'https://api.coingate.com/v2/rates/merchant/USD/RUB'
       )
-      console.log(data.data)
+      // console.log(data.data)
       dispatch({ type: SET_CURRENT_USD, payload: data.data })
     } catch (error) {
       dispatch(setError('Текущий курс недоступен. Попытайтесь позже.'))
@@ -42,7 +42,7 @@ export const setCurrentRate = () => {
       const data = await axios.get(
         'https://api.coingate.com/v2/rates/merchant/EUR/RUB'
       )
-      console.log(data.data)
+      // console.log(data.data)
       dispatch({ type: SET_CURRENT_EUR, payload: data.data })
     } catch (error) {
       dispatch(setError('Текущий курс недоступен. Попытайтесь позже.'))
@@ -54,7 +54,7 @@ export const setRate = (selectedDate = new Date()) => {
   return async (dispatch) => {
     dispatch(setError(''))
 
-    // console.log('SELECTED DATE', selectedDate)
+    console.log('SELECTED DATE ACTION', selectedDate)
     const yyyy = selectedDate.getUTCFullYear()
     let mm =
       selectedDate.getUTCMonth() + 1 > 9
@@ -67,6 +67,7 @@ export const setRate = (selectedDate = new Date()) => {
     let url = `/${yyyy}/${mm}/${dd}/daily_json.js`
     try {
       const data = await api.get(url)
+      dispatch({ type: SET_DATE, payload: selectedDate})
       dispatch({ type: SET_RATE, payload: data.data })
     } catch (error) {
       dispatch(tryNextDate(selectedDate))

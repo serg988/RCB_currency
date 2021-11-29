@@ -6,7 +6,7 @@ import MultiCurrencyItem from '../components/MultiCurrencyItem'
 const MultiCurrencyScreen = ({ navigation }) => {
   const dispatch = useDispatch()
   const rate = useSelector((state) => state.currency.rate.Valute)
-  console.log(rate)
+  // console.log(rate)
   const unfilteredRates = []
   for (const key in rate) {
     unfilteredRates.push({
@@ -15,9 +15,10 @@ const MultiCurrencyScreen = ({ navigation }) => {
       currencyRate: rate[key].Value,
       diff: (rate[key].Value - rate[key].Previous).toFixed(4),
     })
-    console.log(key, rate[key].Name)
+    // console.log(key, rate[key].Name)
   }
   const rates = unfilteredRates.filter((rate) => rate.currencyCode !== 'XDR')
+  
 
   return (
     <ScrollView style={styles.container}>

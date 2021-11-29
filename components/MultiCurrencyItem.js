@@ -10,7 +10,7 @@ const MultiCurrencyItem = ({ code, name, rate, diff }) => {
   const char = ch.char
   const cu = codes[code]
   const curr = cu.curr
-  console.log('FLAG', flag)
+  // console.log('FLAG', flag)
   return (
     <View style={styles.container}>
       <View style={styles.iconContainer}>

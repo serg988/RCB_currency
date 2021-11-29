@@ -7,14 +7,15 @@ import { setRate } from '../store/actions/currency'
 
 enableScreens()
 
-const PickDateScreen = ({ navigation }) => {
+const PickDateScreen = ({ navigation, route }) => {
   const currentDate = useSelector((state) => state.currency.date)
   const [date, setDate] = useState(new Date())
   const [show, setShow] = useState(true)
   const dispatch = useDispatch()
 
   const onChange = (e, selectedDate) => {
-    console.log('CURRENT', selectedDate)
+    // console.log('CURRENT', selectedDate)
+    
 
     setShow(Platform.OS === 'ios')
 
@@ -68,3 +69,5 @@ const styles = StyleSheet.create({
 })
 
 export default PickDateScreen
+
+

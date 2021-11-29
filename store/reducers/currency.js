@@ -25,7 +25,7 @@ const currencyReducer = (state = initialState, action) => {
     case SET_DATE:
       return {
         ...state,
-        date: action.date,
+        date: action.payload,
       }
     case SET_INIT_RATE:
       return {
