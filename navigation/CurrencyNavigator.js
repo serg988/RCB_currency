@@ -17,9 +17,12 @@ import About from '../screens/About'
 import MultiCurrencyScreen from '../screens/MultiCurrencyScreen'
 import { getParsedDate } from '../components/getFormattedDate'
 
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
+
+const Tab = createMaterialBottomTabNavigator()
 const Stack = createStackNavigator()
 
-const Tab = createBottomTabNavigator()
+// const Tab = createBottomTabNavigator()
 
 // function getHeaderTitle(route) {
 //   // If the focused route is not found, we need to assume it's the initial screen
@@ -51,19 +54,23 @@ function Tabs({ navigation, route }) {
   }, [navigation, route, rate])
   return (
     <Tab.Navigator
-      tabBarOptions={{
-        activeTintColor: '#fff',
-        inactiveTintColor: 'lightgray',
-        activeBackgroundColor: '#025b0e',
-        inactiveBackgroundColor: '#9db802',
-        style: {
-          backgroundColor: '#025b0e',
-          paddingBottom: 0,
-        },
-      }}
+      // tabBarOptions={{
+      //   activeTintColor: '#fff',
+      //   inactiveTintColor: 'lightgray',
+      //   activeBackgroundColor: '#025b0e',
+      //   inactiveBackgroundColor: '#9db802',
+      //   style: {
+      //     backgroundColor: '#025b0e',
+      //     paddingBottom: 0,
+      //   },
+      // }}
+      activeColor='#f0edf6'
+      inactiveColor='#9db802'
+      barStyle={{ backgroundColor: '#9db802' }}
+      shifting={true}
     >
       <Tab.Screen
-        name='Home'
+        name='Домой'
         component={HomeScreen}
         options={{
           // tabBarLabel: 'Home',
@@ -71,7 +78,7 @@ function Tabs({ navigation, route }) {
         }}
       />
       <Tab.Screen
-        name='Multi'
+        name='Все валюты'
         component={MultiCurrencyScreen}
         options={{
           // tabBarLabel: 'Home',
