@@ -44,7 +44,7 @@ const MultiCurrencyScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#cfcdcb',
+    backgroundColor: '#9db802',
   },
 })
 

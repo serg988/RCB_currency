@@ -117,10 +117,12 @@ const Main = (props) => {
 
 const styles = StyleSheet.create({
   screen: {
-    marginBottom: 70,
+    backgroundColor: '#9db802',
+    // marginBottom: 70,
     paddingHorizontal: 15,
     alignItems: 'center',
     width: '100%',
+    flex: 1,
   },
   title: {
     // flex: 1,

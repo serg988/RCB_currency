@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { FontAwesome5 } from '@expo/vector-icons'
 import { Foundation } from '@expo/vector-icons'
+import { MaterialCommunityIcons } from '@expo/vector-icons' 
 
 import { useSelector } from 'react-redux'
 
@@ -64,17 +65,28 @@ function Tabs({ navigation, route }) {
       //     paddingBottom: 0,
       //   },
       // }}
-      activeColor='#f0edf6'
+      activeColor='#fff'
       inactiveColor='#9db802'
-      barStyle={{ backgroundColor: '#9db802' }}
+      barStyle={{
+        backgroundColor: '#025b0e',
+        innerHeight: 55,
+        paddingBottom: 8,
+      }}
       shifting={true}
+      labeled={true}
     >
       <Tab.Screen
         name='Домой'
         component={HomeScreen}
         options={{
           // tabBarLabel: 'Home',
-          tabBarIcon: () => <FontAwesome5 name='home' size={24} color='#fff' />,
+          tabBarIcon: () => (
+            <MaterialCommunityIcons
+              name='home-currency-usd'
+              size={24}
+              color='white'
+            />
+          ),
         }}
       />
       <Tab.Screen
@@ -83,7 +95,11 @@ function Tabs({ navigation, route }) {
         options={{
           // tabBarLabel: 'Home',
           tabBarIcon: () => (
-            <Foundation name='dollar-bill' size={34} color='#fff' />
+            <MaterialCommunityIcons
+              name='currency-sign'
+              size={24}
+              color='white'
+            />
           ),
         }}
       />
@@ -98,7 +114,7 @@ function CurrencyNavigator() {
         <Stack.Navigator
           screenOptions={{
             headerStyle: {
-              backgroundColor: '#9db802',
+              backgroundColor: '#025b0e',
             },
             headerTintColor: '#fff',
             headerTitleStyle: {

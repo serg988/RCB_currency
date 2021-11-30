@@ -17,41 +17,44 @@ const HomeScreen = ({ navigation }) => {
   const dispatch = useDispatch()
 
   return (
-    <ScrollView
-      refreshControl={
-        <RefreshControl
-          refreshing={refreshing}
-          onRefresh={() => {
-            dispatch(setCurrentRate())
-          }}
-        />
-      }
-    >
-      <View style={styles.screen}>
-        {/* <Text style={styles.title}>Курсы Валют</Text> */}
-        <View style={{ width: '100%' }}>
-          <Button
-            style={{ outerWidth: '100%' }}
-            title='Выберите дату'
-            color='#9db802'
-            onPress={() => navigation.navigate('PickDate')}
+    <View style={styles.screen}>
+      <ScrollView
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={() => {
+              dispatch(setCurrentRate())
+            }}
           />
+        }
+      >
+        <View>
+          {/* <Text style={styles.title}>Курсы Валют</Text> */}
+          <View style={{ width: '100%' }}>
+            <Button
+              style={{ outerWidth: '100%' }}
+              title='Выберите дату'
+              color='#9db802'
+              onPress={() => navigation.navigate('PickDate')}
+            />
+          </View>
+          <Main />
         </View>
-        <Main />
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
   screen: {
-    // flex: 1,
+    flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
+    backgroundColor: '#9db802',
   },
   title: {
     fontSize: 28,
-    marginTop: 50,
+    // marginTop: 50,
   },
 })
 
